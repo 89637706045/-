@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include <math.h>
+
+int main()
+{
+	int x[99999999], y[99999999], n=0, i=0, t=0, ns[99999999];
+	/*zanylenie chlenov massiva BEG*/
+	for(t=0; t<(n; t++)
+	{
+		x[t]=0;
+		y[t]=0;
+		ns[t]=0;
+	}
+	/*zanylenie chlenov massiva END*/
+	/*vvod tochec BEG*/
+	printf("Vvedite colishestvo tochec: ");
+	scanf("%n", &n);
+	printf("\n\n");
+	for(i=0; i<(n); i++)//chityvyaem coordinatyi
+	{
+		scanf("%d", &x[i]);
+		scanf("%d", &y[i]);
+	}
+	/*vvod tochec END*/
+	/*vypolnen gadnyi algoritm BEG*/
+	float p, l[99999999], s=0, c[99999999], b=0;
+	/*zanylenie chlenov massiva BEG*/
+	for(t=0; t<n; t++)
+	{
+		l[t]=0;
+		c[t]=0;
+	}
+	/*zanylenie chlenov massiva END*/
+	p=1/2;
+	for(t=0; t<(n-1); t++)
+	{
+		for(i=0; i<n; i++)//raschet dlya odnoi tochki
+		{
+			l[i+1]=pow(pow((x[i]-x[i+1]), 2)+pow((y[i]-y[i+1]), 2), p);
+		}
+		for(i=1; i<=n; i++)//vybor naimen pyti dly odnoi tochi
+		{
+			if(l[i]<c)
+			{
+				c[t]=l[i];
+				ns[t]=i;
+			}
+		}
+	}
+	
+	return 0;
+}
