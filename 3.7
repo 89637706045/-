@@ -29,7 +29,7 @@ int main()
 	int a=0;//c kogo nachinaem schitat
 	int v=0;//tekyshi nomer vyb chela
 	//raschet
-	for(i=0; i<n00; i++)
+	for(i=0; i<(n00-1); i++)
 	{
 		while(m0>n)//+otbros perioda slov v chitalke
 		{
@@ -44,7 +44,7 @@ int main()
 		a=v+1;
 		num_vyb[i]=v+1;//+ perevod s chel
 	}
-	
+	num_vyb[n00-1]=100;//poschitat cherez chto-to drygoye
 	for(i=n0; i>(n0-3); i--)//vyvod rezyltata
 	{
 		printf("%i\n", num_vyb[i]);
