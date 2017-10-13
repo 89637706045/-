@@ -1,17 +1,21 @@
-/*3.8*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
-int f1(float x)//fyncya vychislenya x
+int main()
 {
-	float znachenye[3], c=0;
+	float a=0, b=0, a1=a, b1=b, x, prod, znachenye[3], c=0, znach;
+	puts("Vvedite znaychenia konstov otrezka, snachalo min, a potom max");
+	scanf("%f%f", &a, &b);
+	/*printf("%f %f\n", a, b);*/
+	// rasschet"
+	znach=pow(10, -10);
 	znachenye[0]=tan(a)-a;
 	znachenye[1]=tan(b)-b;
-	while(f2(prod)==1)
+	while(prod==1)
 	{
 		c=a1+((b1-a1)/2);
 		znachenye[2]=tan(c)-c;
-		if(znachenie[0]*znachenye[2]<0)
+		if(znachenye[0]*znachenye[2]<0)
 		{
 			b1=c;
 		}
@@ -20,29 +24,16 @@ int f1(float x)//fyncya vychislenya x
 			
 			a1=c;
 		}
+		if((b1-a1)>=znach)
+		{
+			prod=1;	
+		}
+		else
+		{
+			prod=0;
+		}
 	}
 	x=tan(c)-c;
-	return f1(x);
-}
-int f2(float prod)//fyncya vychislenya prod prod=1 - rabotayem; prod=0 - konchayem
-{
-	float znach;
-	znach=pow(10, -10);
-	if((b1-a1)>=znach)
-	{
-	prod=1;	
-	return f2(prod);
-	}
-	prod=0;
-	return f2(prod);
-}
-int main()
-{
-	float a=0, b=0, a1=a, b1=b, x, prod;
-	puts("Vvedite znaychenia konstov otrezka, snachalo min, a potom max");
-	scanf("%f%f", &a, &b);
-	printf("%f %f\n", a, b);
-	float ans=f1(x);// çäåñü ïðîèçîøåë âûçîâ ôóíêöèè  "int f1(float x)"
-	printf(%f, &ans);
+	printf("%f", x);
 	return 0;
 }
