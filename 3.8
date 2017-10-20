@@ -3,7 +3,7 @@
 #include<math.h>
 int main()
 {
-	float a=0, b=0, a1=a, b1=b, x, prod, znachenye[3], c=0, znach;
+	float a=0, b=0, a1=a, b1=b, x=0, prod=1, znachenye[3], c=0, znach=0;
 	puts("Vvedite znaychenia konstov otrezka, snachalo min, a potom max");
 	scanf("%f%f", &a, &b);
 	/*printf("%f %f\n", a, b);*/
@@ -11,6 +11,8 @@ int main()
 	znach=pow(10, -10);
 	znachenye[0]=tan(a)-a;
 	znachenye[1]=tan(b)-b;
+	a1=a;
+	b1=b;
 	while(prod==1)
 	{
 		c=a1+((b1-a1)/2);
@@ -24,13 +26,9 @@ int main()
 			
 			a1=c;
 		}
-		if((b1-a1)>=znach)
+		if((b1-a1)<=znach)
 		{
-			prod=1;	
-		}
-		else
-		{
-			prod=0;
+			prod=0;	
 		}
 	}
 	x=tan(c)-c;
