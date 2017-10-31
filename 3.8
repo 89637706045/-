@@ -1,39 +1,36 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdio.h>
 #include<math.h>
+#include<string.h>
+
 int main()
 {
-	float a=0, b=0, a1=a, b1=b, x=0, prod=1, znachenye[3], c=0, znach=0;
+	float a = 0, b = 0, znach=pow(10, -10), z_niz = 0, z_verx = 0, z_sred = 0;
 	puts("Vvedite znaychenia konstov otrezka, snachalo min, a potom max");
 	scanf("%f%f", &a, &b);
-	/*printf("%f %f\n", a, b);*/
-	// rasschet"
-	znach=pow(10, -10);
-	znachenye[0]=tan(a)-a;
-	znachenye[1]=tan(b)-b;
-	a1=a;
-	b1=b;
-	while(prod==1)
+	
+	int c = 0;
+	while(1)
 	{
-		c=a1+((b1-a1)/2);
-		znachenye[2]=tan(c)-c;
-		if(znachenye[0]*znachenye[2]<0)
+		z_niz = tan(a) - a;
+		z_verx = tan(b) - b;
+		c = a + ((b - a) / 2);
+		z_sred = tan(c) - c;
+		if((z_niz * z_sred) < 0)
 		{
-			b1=c;
-			puts("Otlad1");
+			b = c;
 		}
 		else
 		{
-			a1=c;
-			puts("Otlad2");
+			a = c;
 		}
-		if((abs(b1-a1))<=znach)
+		
+		if((abs(b - a))<=znach)
 		{
-			prod=0;
-			puts("Otlad3");	
+			break;	
 		}
 	}
-	x=tan(c)-c;
-	printf("%f", x);
-	return 0;
+	printf("%f", z_sred);
+	return 0;	
 }
