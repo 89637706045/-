@@ -1,52 +1,53 @@
 #include<stdio.h>
-#include <math.h>
+#include<stdlib.h>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
 
 int main()
 {
-	int x[99999999], y[99999999], n=0, i=0, t=0, ns[99999999];
-	/*zanylenie chlenov massiva BEG*/
-	for(t=0; t<(n; t++)
+	/* vvod danyix */
+	printf("Vvefite colichestvo tochek: ");
+	int n;
+	scanf("%d", &n);
+	int* x = (int* )malloc(n*sizeof(int));
+	int* y = (int* )malloc(n*sizeof(int));
+	for(int i = 0; i < n; ++i)
 	{
-		x[t]=0;
-		y[t]=0;
-		ns[t]=0;
+		scanf("%d %d", &x[i], &y[i]);
 	}
-	/*zanylenie chlenov massiva END*/
-	/*vvod tochec BEG*/
-	printf("Vvedite colishestvo tochec: ");
-	scanf("%n", &n);
-	printf("\n\n");
-	for(i=0; i<(n); i++)//chityvyaem coordinatyi
+	/*  Bydem chitat chto A zadyayotcy x[0] & y[0] , a B x[n] & y[n] */
+	
+	float L = 0; // symmarnya dlyna puti
+	float* l = (float* )malloc((n - 1)*sizeof(float));
+	int q = 0, i = 0;
+	l[0] = 16500000;
+	/*1 xod */
+	
+	for(int a = 0; a < (n - 1); ++a)
 	{
-		scanf("%d", &x[i]);
-		scanf("%d", &y[i]);
-	}
-	/*vvod tochec END*/
-	/*vypolnen gadnyi algoritm BEG*/
-	float p, l[99999999], s=0, c[99999999], b=0;
-	/*zanylenie chlenov massiva BEG*/
-	for(t=0; t<n; t++)
+	for(i = 1; i < (n-1); ++i)
 	{
-		l[t]=0;
-		c[t]=0;
-	}
-	/*zanylenie chlenov massiva END*/
-	p=1/2;
-	for(t=0; t<(n-1); t++)
-	{
-		for(i=0; i<n; i++)//raschet dlya odnoi tochki
+		l[i] = sqrt((x[i] - x[0])*(x[i] - x[0]) + (y[i] - y[0])*(y[i] - y[0]));
+		if(l[i] < l[0])
 		{
-			l[i+1]=pow(pow((x[i]-x[i+1]), 2)+pow((y[i]-y[i+1]), 2), p);
+			q = i;
 		}
-		for(i=1; i<=n; i++)//vybor naimen pyti dly odnoi tochi
-		{
-			if(l[i]<c)
-			{
-				c[t]=l[i];
-				ns[t]=i;
-			}
-		}
+		
 	}
+	
+	L += l[q];
+	x[0] = x[q];
+	x[q] = x[0];
+	y[0] = y[q];
+	y[q] = y[0];
+	}
+	
+	printf("%lf", &L);
+	
+	free(l);
+	free(x);
+	free(y);
 	
 	return 0;
 }
