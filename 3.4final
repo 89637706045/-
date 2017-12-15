@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+
+int main(){
+	
+	int stepen = 0, i = 0, q = 0;
+	double f[2] = {1, 1};
+	puts("Vvedire stepen:");
+	scanf("%d\n", &stepen);
+	puts("!!OTLAD!!");
+	
+	if(stepen <1){puts("vvedenye danye protivorechat ysloviy."); return 0;}
+	puts("!!OTLAD!!");
+	
+	printf("(1+x)^%d=x", stepen);
+	puts("!!OTLAD!!");	
+	for(i = 1; i <= stepen; ++i){
+    	
+    	for(q = 0; q < i; ++q){
+    		f[0] = f[0] * i;
+    		f[1] = f[1] * (stepen - i);
+		}
+		f[0] = f[0] * f[1];
+		
+		f[1] = 1;
+		for(q = 1; q < stepen; ++q){
+    		f[1] *= q;
+		}
+		
+		double kof = f[1]/f[0];
+		
+	    printf("%+d*x^%d", kof, i);
+	    
+    }
+    
+    return 0;
+}
