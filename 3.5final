@@ -1,0 +1,30 @@
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+
+int simple(int * a);
+
+int main()
+{
+	puts("Vvedite chislo");
+	int n = 0;
+	scanf("%d", &n);
+
+	if((n = simple(&n)) == 0){puts("Chislo NEprostoye!"); return 0;}
+	
+	puts("Chislo prostoye!");
+	
+	return 0;
+}
+
+int simple(int * a)
+{
+	int i = 0, b = 0;
+	b = *a;
+	//printf("%d", b);
+	for(i = 2; i < b; ++i){
+		if(b % i == 0){return 0;}
+	}
+	return 1;
+}
