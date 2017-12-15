@@ -1,0 +1,30 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+
+int main()
+{
+	printf("Vvedite nomer chisla Fibbonachi, kotorye hotite polychit.\n");
+	int n = 0;
+	scanf("%d", &n);
+	
+	
+	if(n < 3){
+		puts("1");
+	}
+	
+	else{
+		int i = 0, a[3] = {0, 1, 1};
+		for(i = 3; i <= n; ++i)
+		{
+			a[0] = a[1] + a[2];
+			a[2] = a[1];
+			a[1] = a[0];
+		}
+		printf("%d", a[0]);
+	}
+	
+	
+	return 0;
+}
