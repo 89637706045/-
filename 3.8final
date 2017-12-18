@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+
+int main()
+{
+	double a = 0, b = 0, znach=pow(10, (-10)), z_niz = 0, z_verx = 0, z_sred = 0, c = 0;
+	
+	puts("Vvedite znaychenia konstov otrezka, snachalo min, a potom max");
+	scanf("%lg %lg", &a, &b);
+
+	 
+	while(1)
+	{
+		z_niz = tan(a) - a;
+		z_verx = tan(b) - b;
+		c = (a + ((b - a) / 2));
+		z_sred = tan(c) - c;
+		
+		if((z_niz * z_sred) > 0){
+			a = c;
+		}
+		else{
+			b = c;
+		}
+		
+		if((b - a)<=znach){
+			break;	
+		}
+	}
+	
+	printf("%lg", c);
+	
+	return 0;	
+}
