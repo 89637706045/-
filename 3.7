@@ -1,57 +1,79 @@
-#include<stdio.h>
-#include<stdlib.h>
-int main()
-{
-	int n=0, n0=0,n00=0, m0=0, m00=0, m=0;
-	int i=0;//vspomog dlya ciclov
-	int q=0;//vspomog dlya velichina
-	puts("Vvedite nachalnoe kolishestvo chelovek");//vvod dannyix
-	scanf("%d", &n00);
-	puts(" ");
-	puts("Vvedite chislo slov v chitalke");
-	scanf("%d", &m00);
-	puts(" ");
-	/*int*chel=(int*)malloc(n0*sizeof(int));//sozdyaom din massiv s kol-vo chlenov po odnoimennomy nazvaniy
-	for(i=0; i<n0; i++)
-	{
-		chel[i]=i;
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+
+/* NE mogy nayti ochibky */
+
+
+
+int main(){
+	
+	printf("Vvedite colichestvo slov: ");
+	int m = 0;
+	scanf("%d", &m);
+	printf("\nVvedite colichestvo chelovek: ");
+	int n = 0;
+	scanf("%d", &n);
+	int i = 0;
+	int * voin =(int *)malloc(n*sizeof(int)); 
+	
+	for(i = 0; i < n; ++i ){voin[i] = i + 1;//zanomerovali
 	}
-	int*slov=(int*)malloc(m0*sizeof(int));//sozdyaom din massiv s kol-vo chlenov po odnoimennomy nazvaniy
-	for(i=0; i<m0; i++)
-	{
-		slov[i]=i;
-	}*/
-	int*num_vyb=(int*)malloc(n0*sizeof(int));
-	n0=n00-1;
-	m0=m00-1;
-	n=n0;
-	m=m0;
-	int a=0;//c kogo nachinaem schitat
-	int v=0;//tekyshi nomer vyb chela
-	//raschet
-	for(i=0; i<(n00-1); i++)
-	{
-		while(m0>n)//+otbros perioda slov v chitalke
-		{
-			m=m0-n-1;//ibo sisteme massiva
+	
+	int counter = 0;
+	int nomer_vyb = 0;
+	/*colichestvo vyb voin est colichestvo xodov*/
+	
+	int * vyb = (int *)malloc( n * sizeof(int));
+	
+	while(counter < n){//ibo counter s nyla
+		
+		i = i + n - 1;
+		while(i > (n - 1)){
+			i -= i - (n - 1);
 		}
-		v=a+m;//+
-		while(v>n)//+
-		{
-			v=(v+1)-(n+1)-1;//perexod v ss i obr
+		
+		vyb[counter] = voin[i];
+		voin[i] = 0;
+		
+		int help = 99;
+		
+		
+		while(help != 0){
+		if(help == 0){
+			break;
+		}		
+			
+		if((i+1) == (n-1)){
+			i = 0;
 		}
-		v=v-i;
-		a=v+1;
-		num_vyb[i]=v+1;//+ perevod s chel
+		else{
+			++i;
+		}
+		
+		if(i>(n - 1)){
+			i -=(n-1);
+		
+		}
+		if(voin[i] == 0){
+			i++;	
+		}
+		else{
+			help = 0;
+		}
+		}
+		
+		
+		++counter;
 	}
-	num_vyb[n00-1]=100;//poschitat cherez chto-to drygoye
-	for(i=n0; i>(n0-3); i--)//vyvod rezyltata
-	{
-		printf("%i\n", num_vyb[i]);
+	
+	
+	for(i = (n - 3); i < n; ++i){
+		printf("%d\n", vyb[i]);
 	}
-	free(num_vyb);//chistem pamyat posle din massiv s kol-vo chlenov po odnoimennomy nazvaniy
-	/*free(chel);//chistem pamyat posle din massiv s kol-vo chlenov po odnoimennomy nazvaniy
-	free(slov);//chistem pamyat posle din massiv s kol-vo chlenov po odnoimennomy nazvaniy
-	*/
+	
+	free(voin);
+	free(vyb);
 	return 0;
 }
