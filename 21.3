@@ -13,8 +13,8 @@ typedef struct my_spisok{
 
 spisok * create_spis(){//sozdyaem spisok
 	spisok * head =(spisok*)malloc(sizeof(spisok*));
-    pstr->next = NULL;
-    pstr->prev = NULL;
+    head->next = NULL;
+    head->prev = NULL;
     return head;
 }
 
