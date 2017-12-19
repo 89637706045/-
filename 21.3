@@ -18,21 +18,24 @@ spisok * create_spis(){//sozdyaem spisok
     return head;
 }
 
-int push(list_element* e)//dobat element a v konec spiska
+int push(spisok* e)//dobat element a v konec spiska
 {
     printf("Vvedite snachenie, kotoroe jelaete dobavit\n.");
     int n = 0;
 	scanf("%d", &n);
 	spisok * end = e;
 	
+	spisok * vstav = (spisok*)malloc(sizeof(spisok*));
+	vstav->a =  n;
 	/* teper soverchim probegky po spisky iha poslediy elemen, ved ekazatel posled element est null */
     
 	while(e -> next != NULL){
 	    e = e->next;
-    	e->next = &a;
     }
-	a.prev = e;
-    return 0;
+    vstav->next = e;
+    e = e->prev;
+    vstav->prev = e;
+	return 0;
 }
 
 
@@ -51,7 +54,7 @@ int main()
 		}
 		
 		if(n == 2){
-			n = int push(spisok * head_element);
+			n = push(spisok * head_element);
 			printf("Return value: %d", n);
 		}
 		
