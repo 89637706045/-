@@ -18,27 +18,43 @@ spisok * create_spis(){//sozdyaem spisok
     return head;
 }
 
-int push(spisok* e)//dobat element a v konec spiska
+int push(spisok* head)//dobat element a v konec spiska
 {
     printf("Vvedite snachenie, kotoroe jelaete dobavit\n.");
     int n = 0;
 	scanf("%d", &n);
-	spisok * end = e;
+	spisok * end = head;
 	
 	spisok * vstav = (spisok*)malloc(sizeof(spisok*));
 	vstav->a =  n;
 	/* teper soverchim probegky po spisky iha poslediy elemen, ved ekazatel posled element est null */
     
-	while(e -> next != NULL){
-	    e = e->next;
+	while(end -> next != NULL){
+	    end = end->next;
     }
-    vstav->next = e;
-    e = e->prev;
-    vstav->prev = e;
+    vstav->next = end;
+    end = end->prev;
+    vstav->prev = end;
 	return 0;
 }
 
-
+delite_spisok(spisok * head){
+	spisok * current = head;
+	/*idem v konec spisca */
+	while(current -> next != NULL){
+	    current = current->next;
+	}
+	/*nachinaem ydalat s consa spiska*/
+	while(current->prev != NULL){
+		spisok * temp = current;
+		free(temp);
+        current = current->prev;
+    }	
+    
+	free(current);
+	free(head);
+	return 0;
+}
 
 
 int main()
@@ -47,15 +63,20 @@ int main()
 		printf("Spisok komand:\n1 -- sozdat spisok\	n2 -- dobavit element v spisok konec ego\	n3 -- ydalit spisok\	n9 -- konchit programmy");
 		int n = 0;
 		scanf("%d", &n);
-		
+		spisok * head_element;
 		
 		if(n == 1){
-			spisok * head_element = create_spis();
+			head_element = create_spis();
 		}
 		
 		if(n == 2){
-			n = push(spisok * head_element);
-			printf("Return value: %d", n);
+			n = push(head_element);
+			printf("Return value: %d\n", n);
+		}
+		
+		if(n == 3){
+			n = delite_spisok(head_element);
+			printf("Return value: %d\n", n);
 		}
 		
 		if(n == 9){
