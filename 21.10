@@ -11,14 +11,12 @@ typedef struct struct1{
 	char phone_num[40];
 	}abonent;
 
-
-int menu();
-int add_element(abonent * head);
-
-int sort(abonent * head);
+int find(abonent * head);
 int delite(abonent * head);
-
+int sort(abonent * head);
+int add_element(abonent * head);
 abonent * create_spis();
+int menu();
 
 int main(){
 	
@@ -34,9 +32,22 @@ int main(){
 			n = add_element(head);
 			printf("Return value dobavlenya: %d\n", n);
 			printf("Vypolnyaetsya sortirovka po alfavity\n");
-			n = sort(head);
+			//n = sort(head);
 			printf("Return value sortirovki: %d\n", n);
 		}
+		if(n == 2){
+			n = find(head);
+			printf("Return value poisca: %d\n", n);
+		}
+			if(n == 3){
+			n = delite(head);
+			printf("Return value ydalenia: %d\n", n);
+			printf("sozdat novyi spisok --1\n, ili vyiti iz programmy -- 2?\n");
+			scanf("%d", &n);
+			if(n == 1){head = create_spis();}
+			else{return 0;}
+		}
+			if(n == 4){break;}
 	}
 	
 	printf("Xotite otchistyt operativy, ot spiska?\n1 -- Da\n2 -- Net\n");
@@ -50,6 +61,106 @@ int main(){
 	puts(" ");
 	printf("Dosvidanya.\n");
 	return 0;
+}
+
+int find(abonent * head){
+	printf("Vvedite imya dlya poiska\n");
+    char sname[30];
+    scanf("%29s",sname);
+    int counter = 0;
+    abonent * temp = head;
+    
+    while((temp -> next) != NULL){
+    	if(strcmp(sname,temp->name) == 0){
+    		printf("Nayden:\n%s\n%s\n",temp->name, temp->phone_num);
+    		++counter;
+		}
+	temp = temp -> next;
+	}
+   if(strcmp(sname,temp->name) == 0){
+    		printf("Nayden:\n%s\n%s\n",temp->name, temp->phone_num);
+			counter;
+		}
+	if(counter == 0){printf("K sojaleniy, nuchego ne naydeno.");}
+	}
+
+int delite(abonent * head){//ydalenie spiska
+	abonent * current = head;
+	/*idem v konec spisca */
+	while(current -> next != NULL){
+	    current = current->next;
+	}
+	/*nachinaem ydalat s consa spiska*/
+	abonent * temp;
+	while(current->prev != NULL){
+		temp = current;
+		current = current->prev;
+		free(temp);
+	}	
+    
+	//free(current);
+	free(head);
+	return 0;
+}
+
+int sort(abonent * head){
+	int i = 0;
+	abonent * current = head;
+	abonent * temp = head;//current + 1 = temp
+	abonent * temp1 = temp -> next;
+	abonent * current1;
+	if(((temp -> next) == NULL)||((temp1 -> next) == NULL)){
+		printf("Ne xvataet elementov dlya organizacii sortirovki.\n");
+		return 0;
+	}
+	temp = temp -> next;//1
+	temp = temp -> next;//2
+	current = current -> next;//1
+	int n1 = 0, n2 = 0;
+	while((temp -> next) == NULL){
+		for(i = 0; i < 30; ++i){
+		n2 = (int)(temp->name[i]);
+		n1 = (int)(current->name[i]);
+		if(n2 < n1){
+			temp1 = temp;
+			current1 = current -> prev;
+			current1 -> next = temp;
+			temp -> prev = current1;
+			temp -> next = current;
+			current -> prev = temp1;
+			current -> next = temp1 -> next;
+			temp1 = temp1 -> next;
+			temp1 -> prev = current;
+			temp1 = temp;
+			temp = current;
+			current = temp1;
+			break;//dlya cikla for, a mojet on srabotat slychaino na while?
+			}
+		}	
+		temp = temp -> next;
+		current = current -> next;
+	}
+	n1 = 0; n2 = 0;
+	for(i = 0; i < 30; ++i){
+		n2 = (int)(temp->name[i]);
+		n1 = (int)(current->name[i]);
+		if(n2 < n1){
+			temp1 = temp;
+			current1 = current -> prev;
+			current1 -> next = temp;
+			temp -> prev = current1;
+			temp -> next = current;
+			current -> prev = temp1;
+			current -> next = temp1 -> next;
+			temp1 = temp1 -> next;
+			temp1 -> prev = current;
+			temp1 = temp;
+			temp = current;
+			current = temp1;
+			break;//dlya cikla for
+			}
+		}
+	return 0;	
 }
 
 int add_element(abonent * head){
@@ -90,7 +201,7 @@ int menu(){
 	char com[50], n = 0;
 	scanf("%49s",com);
 	if ((strcmp(com,"INFO") == 0) || (strcmp(com,"info") == 0)){
-		printf("find\ninsert\ndelite\nbreak\ninfo\n");}	
+		printf("find\ninsert\ndelite\nbreak\ninfo\n");return 0;}	
 		
 	if((strcmp(com,"FIND") == 0) || (strcmp(com,"find") == 0)){return 2;}
 	
