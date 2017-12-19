@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+typedef struct atlet
+{
+    int m;
+    int f;
+}atlet; 
+
+int main(){
+	puts("Vvedite chislo atletov");
+	int at, i=0;
+	scanf("%i", &at);
+	/*
+	Bylo
+	int*m=(int*)malloc(at*sizeof(int));
+	int*f=(int*)malloc(at*sizeof(int));*/
+	//Stalo
+	atlet*a=(atlet*)malloc(at*sizeof(atlet));
+	//v "a" zapisan adress
+	
+	for(i=0; i <at ; ++i){
+		puts("Vvedite massy i sily atleta");
+		scanf("%i", &(a[i].m));
+		printf(" ");
+		scanf("%i/n", &(a[i].f));
+	}
+	
+	int q=0;
+	for(q=0; q<at; q++){
+		for(i=0; i<at; i++)//ñîðòèðîâêà ïî ñèëå îò ñëàá ê ñèë
+		{
+			if (a[i].f>a[i+1].f){
+				atlet temp;//Ïî÷åìó íàäî *temp
+				temp=a[i+1];
+				a[i+1]=a[i];
+				a[i]=temp;
+			}
+		}
+	}
+		
+	int mb=0, h=0;
+	for(i=0; i<at; i++)//ñòðîèòåëüñòâî ïî óêàçàíèþ â çàäàâàë.
+	{
+		if(mb<=a[i].f){
+			mb=mb+a[i].m;
+			printf("otlad\n");
+			h++;
+		}
+	}
+	printf("vysota %d", h);
+	free(a);
+	return 0;
+}
