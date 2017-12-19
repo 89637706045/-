@@ -1,1 +1,77 @@
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
 
+typedef struct struct1{
+    struct struct1* prev;
+    struct struct1* next;
+    
+	char name[30];
+	char phone_num[40];
+	}abonent;
+
+
+int menu();
+int add_element(abonent * head);
+int sort(abonent * head);
+int delite(abonent * head);
+
+abonent * create_spis();
+
+int main(){
+	
+	int n =0;
+	abonent * head;
+	printf("Dobro pojalovat v telefonnyu zapisnyu knigky,\n");
+	//printf("Printf soday golovnoy element.\n")
+	head = create_spis();//sozdyaem spisok
+	
+	while(1){
+		n = menu();
+		if(n == 1){
+			n = add_element(head);
+			printf("Return value dobavlenya: %d\n", n);
+			printf("Vypolnyaetsya sortirovka po alfavity\n");
+			n = sort(head);
+			printf("Return value sortirovki: %d\n", n);
+		}
+	}
+	
+	printf("Xotite otchistyt operativy, ot spiska?\n1 -- Da\n2 -- Net\n");
+	scanf("%d", &n);
+	if(n == 2){
+		return 0;
+	}
+	
+	n = delite(head);
+	printf("Return value ydalenia: %d\n", n);
+	puts(" ");
+	printf("Dosvidanya.\n");
+	return 0;
+}
+
+abonent * create_spis(){//sozdyaem spisok
+	abonent * head =(abonent *)malloc(sizeof(abonent *));
+    head->next = NULL;
+    head->prev = NULL;
+    return head;
+}
+
+int menu(){
+	printf("Vvedite comandy, polny spisok prikazov mogno polychit po zanrosy \"info\".\n");
+	char com[50], n = 0;
+	scanf("%49s",com);
+	if ((strcmp(com,"INFO") == 0) || (strcmp(com,"info") == 0)){
+		printf("find\ninsert\ndelite\nbreak\ninfo\n");}	
+		
+	if((strcmp(com,"FIND") == 0) || (strcmp(com,"find") == 0)){return 2;}
+	
+	if((strcmp(com,"INSERT") == 0) || (strcmp(com,"insert") == 0)){return 1;}
+	
+	if((strcmp(com,"DELETE") == 0) || (strcmp(com,"delete") == 0)){return 3;}
+	
+	if((strcmp(com,"BREAK") == 0) || (strcmp(com,"break") == 0)){return 4;}
+	
+	//if
+}
