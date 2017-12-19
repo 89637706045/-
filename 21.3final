@@ -62,25 +62,58 @@ int pop(spisok * head){//vyvesti na ekran posledniy element spiska/gotova
 	return 0;
 }
 
-int unshift(spisok * head){
+int unshift(spisok * head){//dobyavlyaet novy element v nachalo spiska
 	spisok * current = head;
-	spisok * temp = current;
 	printf("Vvedite snachenie, kotoroe jelaete dobavit v nachalo spiska\n");
 	int n  = 99999;
-	scanf("%d", n);
+	scanf("%d", &n);
 	spisok * vstav = (spisok*)malloc(sizeof(spisok*));
 	vstav->a = n;
+	vstav -> prev = head;
 	
+	if(head -> next == NULL){
+		head -> next = vstav;
+		vstav -> next = NULL;
+	}
+	
+	else{
+	current = current -> next;
+	head -> next = vstav;
+	vstav -> next = current;
+	current -> prev = vstav;
+	}
+	
+	return 0;
+}
+
+int shift(spisok * head){
+	spisok * current = head;
+	current = current -> next;
+	printf("Pervyi element spiska: %d", current -> a);
+	return 0;
+}
+int printall(spisok * head){
+	spisok * current = head;
+	if(head -> next == NULL){printf("Pystoy spisok!\n"); return 0;}
+	current = current -> next;
+	int schetshik = 1;
+	while((current -> next) != NULL){
+		printf("Element # %d:	%d\n", schetshik, (current->a));
+		++schetshik;
+		current = current -> next;
+	}
+	printf("Element # %d:	%d\n", schetshik, (current->a));
+	return 0;
 }
 
 int main()
 {
+	int n = 0;
+	spisok * head_element;
 	while(1){
-		printf("Spisok komand:\n1 -- sozdat spisok\n2 -- dobavit element v spisok konec ego\n3 -- ydalit spisok\n4 -- pokazat posledniy element spiska\n5 -- dovit noviy element v nachalo\n9 -- konchit programmy\n");
-		int n = 0;
+		printf("Spisok komand:\n1 -- sozdat spisok\n2 -- dobavit element v spisok konec ego\n3 -- ydalit spisok\n4 -- pokazat posledniy element spiska\n5 -- dovit noviy element v nachalo\n6 -- Vyvesti na ekran pervyi element spiska\n7 -- Vyvesti na ekran vce elementy spiska, nachinaya s pervogo i konchaya poslednym\n9 -- konchit programmy\n");
 		scanf("%d", &n);
-		spisok * head_element;
-		
+				
 		if(n == 1){
 			head_element = create_spis();
 		}
@@ -102,10 +135,26 @@ int main()
 			n = unshift(head_element);
 			printf("Return value: %d\n", n);
 		}
+		if(n == 6){
+			n = shift(head_element);
+			printf("Return value: %d\n", n);
+		}
+		if(n == 7){
+			n = printall(head_element);
+			printf("Return value: %d\n", n);
+		}
 		if(n == 9){
 			break;
 		}
 	}
+	
+	printf("Vy jelayete pochistit operativy pered vyxodom is programmy?\n1 -- Da\n2 -- Net\n");
+	scanf("%d", &n);
+	if(n == 2){
+		return 1;
+	}
+	n = delite_spisok(head_element);
+	printf("Fynciya chistki otrabotala. Return value: %d\n", n);
 	
 	return 0;
 }
