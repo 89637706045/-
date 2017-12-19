@@ -11,56 +11,72 @@ typedef struct my_spisok{
 
 
 
-spisok * create_spis(){//sozdyaem spisok
-	spisok * head =(spisok*)malloc(sizeof(spisok*));
-    head->next = NULL;
-    head->prev = NULL;
-    return head;
-}
-
-int push(spisok* head)//dobat element a v konec spiska
+spisok * create_spis();//sozdyaem spisok/gotova
+	
+int push(spisok* head)//dobat element a v konec spiska/gotova
 {
-    printf("Vvedite snachenie, kotoroe jelaete dobavit\n.");
-    int n = 0;
+    printf("Vvedite snachenie, kotoroe jelaete dobavit v konec spiska\n");
+    int n = 999999;
 	scanf("%d", &n);
 	spisok * end = head;
 	
 	spisok * vstav = (spisok*)malloc(sizeof(spisok*));
-	vstav->a =  n;
+	vstav->a = n;
 	/* teper soverchim probegky po spisky iha poslediy elemen, ved ekazatel posled element est null */
     
 	while(end -> next != NULL){
 	    end = end->next;
     }
-    vstav->next = end;
-    end = end->prev;
-    vstav->prev = end;
-	return 0;
+    vstav->next = NULL;
+    end -> next = vstav;
+    vstav -> prev = end;
+    return 0;
 }
 
-delite_spisok(spisok * head){
+delite_spisok(spisok * head){//ydalenie spiska/gotova
 	spisok * current = head;
 	/*idem v konec spisca */
 	while(current -> next != NULL){
 	    current = current->next;
 	}
 	/*nachinaem ydalat s consa spiska*/
+	spisok * temp;
 	while(current->prev != NULL){
-		spisok * temp = current;
+		temp = current;
+		current = current->prev;
 		free(temp);
-        current = current->prev;
-    }	
+	}	
     
-	free(current);
+	//free(current);
 	free(head);
 	return 0;
 }
 
+int pop(spisok * head){//vyvesti na ekran posledniy element spiska/gotova
+	spisok * p = head;
+	while(p->next != NULL){
+		p = p->next;
+	}
+	
+	printf("%d\n", p->a);
+	return 0;
+}
+
+int unshift(spisok * head){
+	spisok * current = head;
+	spisok * temp = current;
+	printf("Vvedite snachenie, kotoroe jelaete dobavit v nachalo spiska\n");
+	int n  = 99999;
+	scanf("%d", n);
+	spisok * vstav = (spisok*)malloc(sizeof(spisok*));
+	vstav->a = n;
+	
+}
 
 int main()
 {
 	while(1){
-		printf("Spisok komand:\n1 -- sozdat spisok\	n2 -- dobavit element v spisok konec ego\	n3 -- ydalit spisok\	n9 -- konchit programmy");
+		printf("Spisok komand:\n1 -- sozdat spisok\n2 -- dobavit element v spisok konec ego\n3 -- ydalit spisok\n4 -- pokazat posledniy element spiska\n5 -- dovit noviy element v nachalo\n9 -- konchit programmy\n");
 		int n = 0;
 		scanf("%d", &n);
 		spisok * head_element;
@@ -78,11 +94,25 @@ int main()
 			n = delite_spisok(head_element);
 			printf("Return value: %d\n", n);
 		}
-		
+		if(n == 4){
+			n = pop(head_element);
+			printf("Return value: %d\n", n);
+		}
+		if(n == 5){
+			n = unshift(head_element);
+			printf("Return value: %d\n", n);
+		}
 		if(n == 9){
 			break;
 		}
 	}
 	
 	return 0;
+}
+
+spisok * create_spis(){//sozdyaem spisok
+	spisok * head =(spisok*)malloc(sizeof(spisok*));
+    head->next = NULL;
+    head->prev = NULL;
+    return head;
 }
